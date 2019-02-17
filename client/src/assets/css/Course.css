@@ -1,0 +1,11 @@
+iframe {
+    width: 32rem;
+    height: 18rem;
+}
+
+@media (max-width: 768px) {
+    iframe {
+        width: 19.2rem;
+        height: 10.8rem;
+    }
+}
