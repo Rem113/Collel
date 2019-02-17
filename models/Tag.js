@@ -10,11 +10,7 @@ const TagSchema = new Schema({
 		{
 			type: Schema.Types.ObjectId
 		}
-	],
-	clicks: {
-		type: Number,
-		default: 0
-	}
+	]
 })
 
 module.exports = mongoose.model("Tag", TagSchema, "Tags")

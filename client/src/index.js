@@ -1,10 +1,10 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Root from './components/Root'
+import React from "react"
+import ReactDOM from "react-dom"
+import Root from "./components/Root"
 
-import 'bootstrap/dist/css/bootstrap.css';
-import './assets/css/Reset.css'
+import "./assets/css/Reset.css"
+import "bootstrap/dist/css/bootstrap.css"
 
-import store from './store'
+import store from "./store"
 
-ReactDOM.render(<Root store={store} />, document.getElementById('root'));
+ReactDOM.render(<Root store={store} />, document.getElementById("root"))

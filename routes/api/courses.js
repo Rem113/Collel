@@ -21,25 +21,9 @@ router.get("/:id", (req, res) => {
 		$inc: {
 			clicks: 1
 		}
-	}).then(course => res.json(course))
-})
-
-// @route   GET api/courses/:id/prev
-// @desc    Get a link to the previous course
-// @access  Public
-router.get("/:id/prev", (req, res) => {
-	Course.findOne({ _id: { $gt: req.params.id } })
-		.then(prev => res.json(prev))
-		.catch(err => console.log(err))
-})
-
-// @route   GET api/courses/:id/next
-// @desc    Get a link to the next course
-// @access  Public
-router.get("/:id/next", (req, res) => {
-	Course.findOne({ _id: { $lt: req.params.id } })
-		.then(next => res.json(next))
-		.catch(err => console.log(err))
+	})
+		.populate("tags", ["name"])
+		.then(course => res.json(course))
 })
 
 // @route   POST api/courses

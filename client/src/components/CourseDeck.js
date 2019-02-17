@@ -1,46 +1,69 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { getCourses } from '../actions/courseActions'
-import { Col, Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, Button } from 'reactstrap'
-import { Link } from 'react-router-dom'
-import { formatDate } from '../utils/dateUtils'
+import React, { Component } from "react"
+import { connect } from "react-redux"
+import { getCourses } from "../actions/courseActions"
+import {
+	Col,
+	Card,
+	CardImg,
+	CardText,
+	CardBody,
+	CardTitle,
+	CardSubtitle,
+	Button
+} from "reactstrap"
+import { Link } from "react-router-dom"
+import { formatDate } from "../utils/dateUtils"
 
 export class CourseDeck extends Component {
+	componentDidMount() {
+		this.props.getCourses()
+	}
 
-    componentDidMount() {
-        this.props.getCourses()
-    }
-
-    render() {
-        const { courses } = this.props.course
-        return (
-            <React.Fragment>
-                {courses.map(course => 
-                    <Col key={course._id} md="6" lg="4">
-                        <Card>
-                            <CardImg top src={"http://img.youtube.com/vi/" + course.link + "/maxresdefault.jpg"} />
-                            <CardBody>
-                                <CardTitle>{course.title} <span className='card-clicks'>(vu {course.clicks} fois)</span></CardTitle>
-                                <CardSubtitle>{formatDate(new Date(course.date))}</CardSubtitle>
-                                <CardText>
-                                    {course.description}
-                                    <br />
-                                    {course.tags.map(tag => 
-                                        <Link to='/api/tags'>#{tag.name}</Link>
-                                    )}
-                                </CardText>
-                                <Link to={'/api/courses/' + course._id}><Button color="primary">Voir le cours</Button></Link>
-                            </CardBody>
-                        </Card>
-                    </Col>
-                )}
-            </React.Fragment>
-        )
-    }
+	render() {
+		const { courses } = this.props.course
+		return (
+			<React.Fragment>
+				{courses.map(course => (
+					<Col key={course._id} md="6" lg="4">
+						<Card>
+							<CardImg
+								top
+								src={
+									"http://img.youtube.com/vi/" +
+									course.link +
+									"/maxresdefault.jpg"
+								}
+							/>
+							<CardBody>
+								<CardTitle>
+									{course.title}{" "}
+									<span className="card-clicks">(vu {course.clicks} fois)</span>
+								</CardTitle>
+								<CardSubtitle>{formatDate(new Date(course.date))}</CardSubtitle>
+								<CardText>
+									{course.description}
+									<br />
+									{course.tags.map(tag => (
+										<Link to="/api/tags">#{tag.name}</Link>
+									))}
+								</CardText>
+								<Link to={"/api/courses/" + course._id}>
+									<Button color="primary">Voir le cours</Button>
+								</Link>
+							</CardBody>
+						</Card>
+					</Col>
+				))}
+			</React.Fragment>
+		)
+	}
 }
 
 const mapStateToProps = state => ({
-    course: state.course
+	course: state.course
 })
 
-export default connect(mapStateToProps, { getCourses })(CourseDeck)
+export default connect(
+	mapStateToProps,
+	{ getCourses }
+)(CourseDeck)

@@ -33,7 +33,7 @@ router.delete("/:id", (req, res) => {
 	Course.where({
 		tags: {
 			$elemMatch: {
-				_id: req.params.id
+				id: req.params.id
 			}
 		}
 	}).then(courses =>
