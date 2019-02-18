@@ -14,7 +14,7 @@ import {
 import { Link } from "react-router-dom"
 import { formatDate } from "../utils/dateUtils"
 
-export class CourseDeck extends Component {
+class CourseDeck extends Component {
 	componentDidMount() {
 		this.props.getCourses()
 	}

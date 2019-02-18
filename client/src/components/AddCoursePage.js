@@ -13,7 +13,7 @@ import { addCourse } from "../actions/courseActions"
 import { connect } from "react-redux"
 import { withRouter } from "react-router-dom"
 
-export class AddCoursePage extends Component {
+class AddCoursePage extends Component {
 	constructor() {
 		super()
 

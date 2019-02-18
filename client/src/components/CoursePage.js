@@ -5,7 +5,7 @@ import { Container, Row, Col } from "reactstrap"
 
 import "../assets/css/Course.css"
 
-export class Course extends Component {
+class Course extends Component {
 	componentDidMount() {
 		this.props.getCourseById(this.props.id)
 	}
@@ -42,12 +42,11 @@ export class Course extends Component {
 	}
 }
 
-const mapStateToProps = (state, ownProps) => {
-	return {
-		...state,
-		id: ownProps.match.params.id
-	}
-}
+const mapStateToProps = (state, ownProps) => ({
+	course: state.course,
+	id: ownProps.match.params.id
+})
+
 export default connect(
 	mapStateToProps,
 	{ getCourseById }

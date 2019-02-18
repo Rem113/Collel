@@ -2,7 +2,8 @@ import {
 	GET_COURSES,
 	GET_COURSE_BY_ID,
 	ADD_COURSE,
-	LOADING_COURSE
+	LOADING_COURSE,
+	DELETE_COURSE
 } from "../actions/types"
 
 const initialState = {
@@ -36,6 +37,12 @@ export default function(state = initialState, action) {
 			return {
 				...state,
 				loading: true
+			}
+
+		case DELETE_COURSE:
+			return {
+				...state,
+				courses: state.courses.filter(course => course._id !== action.payload)
 			}
 
 		default:
