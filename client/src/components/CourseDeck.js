@@ -23,37 +23,41 @@ export class CourseDeck extends Component {
 		const { courses } = this.props.course
 		return (
 			<React.Fragment>
-				{courses.map(course => (
-					<Col key={course._id} md="6" lg="4">
-						<Card>
-							<CardImg
-								top
-								src={
-									"http://img.youtube.com/vi/" +
-									course.link +
-									"/maxresdefault.jpg"
-								}
-							/>
-							<CardBody>
-								<CardTitle>
-									{course.title}{" "}
-									<span className="card-clicks">(vu {course.clicks} fois)</span>
-								</CardTitle>
-								<CardSubtitle>{formatDate(new Date(course.date))}</CardSubtitle>
-								<CardText>
-									{course.description}
-									<br />
-									{course.tags.map(tag => (
-										<Link to="/api/tags">#{tag.name}</Link>
-									))}
-								</CardText>
-								<Link to={"/api/courses/" + course._id}>
-									<Button color="primary">Voir le cours</Button>
-								</Link>
-							</CardBody>
-						</Card>
-					</Col>
-				))}
+				{courses.length &&
+					courses.map(course => (
+						<Col key={course._id} md="6" lg="4">
+							<Card>
+								<CardImg
+									top
+									src={
+										"http://img.youtube.com/vi/" +
+										course.link +
+										"/maxresdefault.jpg"
+									}
+								/>
+								<CardBody>
+									<CardTitle>
+										{course.title}{" "}
+										<span className="card-clicks">
+											(vu {course.clicks} fois)
+										</span>
+									</CardTitle>
+									<CardSubtitle>
+										{formatDate(new Date(course.date))}
+									</CardSubtitle>
+									<CardText>
+										{course.description}
+										<br />
+										{course.tags &&
+											course.tags.map(tag => <Link to="#">#{tag} </Link>)}
+									</CardText>
+									<Link to={"/course/" + course._id}>
+										<Button color="primary">Voir le cours</Button>
+									</Link>
+								</CardBody>
+							</Card>
+						</Col>
+					))}
 			</React.Fragment>
 		)
 	}

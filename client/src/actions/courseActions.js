@@ -20,7 +20,7 @@ export const getCourseById = id => dispatch => {
 	dispatch({
 		type: LOADING_COURSE
 	})
-	axios.get("/api/courses/" + id).then(res => {
+	axios.get("/api/courses/id/" + id).then(res => {
 		dispatch({
 			type: GET_COURSE_BY_ID,
 			payload: res.data
@@ -28,20 +28,27 @@ export const getCourseById = id => dispatch => {
 	})
 }
 
-export const addCourse = course => dispatch => {
-	axios.post("/api/courses").then(res =>
-		dispatch({
-			type: ADD_COURSE,
-			payload: course
+export const addCourse = (course, history) => dispatch => {
+	axios
+		.post("/api/courses", course)
+		.then(res => {
+			dispatch({
+				type: ADD_COURSE,
+				payload: res.data
+			})
+			history.push("/")
 		})
-	)
+		.catch(err => console.log(err))
 }
 
-export const deleteCourse = id => dispatch => {
-	axios.delete("/api/courses/" + id).then(res =>
-		dispatch({
-			type: DELETE_COURSE,
-			payload: id
-		})
-	)
+export const deleteCourse = (id, history) => dispatch => {
+	axios
+		.delete(`/api/courses/${id}`)
+		.then(res =>
+			dispatch({
+				type: DELETE_COURSE,
+				payload: id
+			})
+		)
+		.catch(err => console.log(err))
 }

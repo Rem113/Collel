@@ -3,27 +3,35 @@ const router = express.Router()
 
 const Course = require("../../models/Course")
 
-// @route   GET api/courses
-// @desc    Get all courses
+// @route   GET api/courses/:filter?
+// @desc    Get all courses (with filter)
 // @access  Public
-router.get("/", (req, res) => {
+router.get("/:filter?", (req, res) => {
+	const filter = req.params.filter
+		? {
+				[req.params.filter]: -1
+		  }
+		: {
+				date: -1
+		  }
+
 	Course.find()
-		.sort({ date: -1 })
-		.populate("tags", ["name"])
+		.sort(filter)
 		.then(courses => res.json(courses))
+		.catch(err => console.log(err))
 })
 
-// @route   GET api/courses/:id
+// @route   GET api/courses/id/:id
 // @desc    Get a specific course
 // @access  Public
-router.get("/:id", (req, res) => {
+router.get("/id/:id", (req, res) => {
 	Course.findByIdAndUpdate(req.params.id, {
 		$inc: {
 			clicks: 1
 		}
 	})
-		.populate("tags", ["name"])
 		.then(course => res.json(course))
+		.catch(err => console.log(err))
 })
 
 // @route   POST api/courses
@@ -32,15 +40,19 @@ router.get("/:id", (req, res) => {
 router.post("/", (req, res) => {
 	const data = req.body
 
+	let tags = data.tags.split(",").map(tag => tag.trim().toLowerCase())
+
 	const course = new Course({
 		title: data.title,
 		description: data.description,
-		date: data.date,
 		link: data.link,
-		tags: data.tags
+		tags: tags
 	})
 
-	course.save().then(course => res.json(course))
+	course
+		.save()
+		.then(course => res.json(course))
+		.catch(err => console.log(err))
 })
 
 // @route   DELETE api/courses/:id

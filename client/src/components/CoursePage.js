@@ -1,24 +1,13 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import {
-	getCourseById,
-	getPreviousCourse,
-	getNextCourse
-} from "../actions/courseActions"
-import { Button, Container, Row, Col } from "reactstrap"
-import { Link } from "react-router-dom"
+import { getCourseById } from "../actions/courseActions"
+import { Container, Row, Col } from "reactstrap"
 
 import "../assets/css/Course.css"
 
 export class Course extends Component {
 	componentDidMount() {
-		this.loadCourses()
-	}
-
-	loadCourses = () => {
 		this.props.getCourseById(this.props.id)
-		this.props.getNextCourse(this.props.id)
-		this.props.getPreviousCourse(this.props.id)
 	}
 
 	render() {
@@ -28,29 +17,7 @@ export class Course extends Component {
 			)
 		}
 
-		const { course, prev, next } = this.props.course
-
-		let prevButton
-
-		if (prev !== null)
-			prevButton = (
-				<Link to={"/api/courses/" + prev._id}>
-					<Button color="primary" onClick={this.loadCourses}>
-						Cours précédent
-					</Button>
-				</Link>
-			)
-
-		let nextButton
-
-		if (next !== null)
-			nextButton = (
-				<Link to={"/api/courses/" + next._id}>
-					<Button color="primary" onClick={this.loadCourses}>
-						Cours suivant
-					</Button>
-				</Link>
-			)
+		const { course } = this.props.course
 
 		return (
 			<Container className="h-100">
@@ -68,14 +35,6 @@ export class Course extends Component {
 							allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
 							allowFullScreen
 						/>
-						<Row className="justify-content-center pt-4">
-							<Col className="p-4" xs="6">
-								{prevButton}
-							</Col>
-							<Col className="p-4" xs="6">
-								{nextButton}
-							</Col>
-						</Row>
 					</Col>
 				</Row>
 			</Container>
@@ -91,5 +50,5 @@ const mapStateToProps = (state, ownProps) => {
 }
 export default connect(
 	mapStateToProps,
-	{ getCourseById, getPreviousCourse, getNextCourse }
+	{ getCourseById }
 )(Course)
