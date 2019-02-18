@@ -29,7 +29,7 @@ export default function(state = initialState, action) {
 		case ADD_COURSE:
 			return {
 				...state,
-				courses: action.payload
+				courses: [...state.courses, action.payload]
 			}
 
 		case LOADING_COURSE:

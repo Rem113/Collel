@@ -23,9 +23,9 @@ export class CourseDeck extends Component {
 		const { courses } = this.props.course
 		return (
 			<React.Fragment>
-				{courses.length &&
+				{courses &&
 					courses.map(course => (
-						<Col key={course._id} md="6" lg="4">
+						<Col key={course._id} md="6" lg="4" className="align-items-stretch">
 							<Card>
 								<CardImg
 									top
@@ -49,9 +49,11 @@ export class CourseDeck extends Component {
 										{course.description}
 										<br />
 										{course.tags &&
-											course.tags.map(tag => <Link to="#">#{tag} </Link>)}
+											course.tags.map(tag => (
+												<Link to={`/tag/${tag}`}>#{tag} </Link>
+											))}
 									</CardText>
-									<Link to={"/course/" + course._id}>
+									<Link to={`/course/id/${course._id}`}>
 										<Button color="primary">Voir le cours</Button>
 									</Link>
 								</CardBody>

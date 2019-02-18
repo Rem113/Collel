@@ -2,6 +2,7 @@ const express = require("express")
 const router = express.Router()
 
 const Course = require("../../models/Course")
+const courseValidator = require("../../validators/course")
 
 // @route   GET api/courses/:filter?
 // @desc    Get all courses (with filter)
@@ -39,6 +40,10 @@ router.get("/id/:id", (req, res) => {
 // @access  Public
 router.post("/", (req, res) => {
 	const data = req.body
+
+	const { errors, isValid } = validateCourse(data)
+
+	if (!isValid) return res.status(400).json(errors)
 
 	let tags = data.tags.split(",").map(tag => tag.trim().toLowerCase())
 

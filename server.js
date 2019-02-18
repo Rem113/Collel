@@ -1,6 +1,7 @@
 const express = require("express")
 const mongoose = require("mongoose")
 const courses = require("./routes/api/courses")
+const tags = require("./routes/api/tags")
 
 const app = express()
 
@@ -22,3 +23,4 @@ app.listen(1234, () => {
 
 // API routes
 app.use("/api/courses", courses)
+app.use("/api/tags/", tags)

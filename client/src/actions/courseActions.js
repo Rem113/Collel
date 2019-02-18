@@ -16,6 +16,15 @@ export const getCourses = () => dispatch => {
 	)
 }
 
+export const getCoursesByTag = tag => dispatch => {
+	axios.get(`/api/tags/${tag}`).then(res =>
+		dispatch({
+			type: GET_COURSES,
+			payload: res.data
+		})
+	)
+}
+
 export const getCourseById = id => dispatch => {
 	dispatch({
 		type: LOADING_COURSE
