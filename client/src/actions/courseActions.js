@@ -3,7 +3,9 @@ import {
 	GET_COURSE_BY_ID,
 	ADD_COURSE,
 	DELETE_COURSE,
-	LOADING_COURSE
+	EDIT_COURSE,
+	LOADING_COURSE,
+	ERROR
 } from "./types"
 import axios from "axios"
 
@@ -56,7 +58,30 @@ export const addCourse = (course, history) => dispatch => {
 			})
 			history.push("/")
 		})
-		.catch(err => console.log(err))
+		.catch(err =>
+			dispatch({
+				type: ERROR,
+				payload: err.response.data
+			})
+		)
+}
+
+export const editCourse = (id, course, history) => dispatch => {
+	axios
+		.post(`/api/courses/${id}`, course)
+		.then(res => {
+			dispatch({
+				type: EDIT_COURSE,
+				payload: res.data
+			})
+			history.push("/")
+		})
+		.catch(err =>
+			dispatch({
+				type: ERROR,
+				payload: err.response.data
+			})
+		)
 }
 
 export const deleteCourse = id => dispatch => {
@@ -68,5 +93,10 @@ export const deleteCourse = id => dispatch => {
 				payload: id
 			})
 		)
-		.catch(err => console.log(err))
+		.catch(err =>
+			dispatch({
+				type: ERROR,
+				payload: err.response.data
+			})
+		)
 }

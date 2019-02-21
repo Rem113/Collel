@@ -12,7 +12,6 @@ import {
 	Button
 } from "reactstrap"
 import { Link } from "react-router-dom"
-import { formatDate } from "../utils/dateUtils"
 
 class CourseDeck extends Component {
 	componentDidMount() {
@@ -29,11 +28,9 @@ class CourseDeck extends Component {
 							<Card>
 								<CardImg
 									top
-									src={
-										"http://img.youtube.com/vi/" +
-										course.link +
-										"/maxresdefault.jpg"
-									}
+									src={`http://img.youtube.com/vi/${
+										course.link
+									}/maxresdefault.jpg`}
 								/>
 								<CardBody>
 									<CardTitle>
@@ -43,7 +40,7 @@ class CourseDeck extends Component {
 										</span>
 									</CardTitle>
 									<CardSubtitle>
-										{formatDate(new Date(course.date))}
+										{new Date(course.date).toLocaleDateString()}
 									</CardSubtitle>
 									<CardText>
 										{course.description}

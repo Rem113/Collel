@@ -3,13 +3,16 @@ import {
 	GET_COURSE_BY_ID,
 	ADD_COURSE,
 	LOADING_COURSE,
-	DELETE_COURSE
+	DELETE_COURSE,
+	EDIT_COURSE,
+	ERROR
 } from "../actions/types"
 
 const initialState = {
 	courses: [],
 	loading: false,
-	course: {}
+	course: {},
+	errors: {}
 }
 
 export default function(state = initialState, action) {
@@ -39,10 +42,24 @@ export default function(state = initialState, action) {
 				loading: true
 			}
 
+		case EDIT_COURSE:
+			return {
+				...state,
+				courses: state.courses.map(course =>
+					course._id === action.payload.id ? action.payload : course
+				)
+			}
+
 		case DELETE_COURSE:
 			return {
 				...state,
 				courses: state.courses.filter(course => course._id !== action.payload)
+			}
+
+		case ERROR:
+			return {
+				...state,
+				errors: { ...action.payload }
 			}
 
 		default:

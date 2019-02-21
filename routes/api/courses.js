@@ -60,6 +60,33 @@ router.post("/", (req, res) => {
 		.catch(err => console.log(err))
 })
 
+// @route   POST api/courses/:id
+// @desc    Edit a course
+// @access  Public
+router.post("/:id", (req, res) => {
+	const data = req.body
+	const id = req.params.id
+
+	const { errors, isValid } = validateCourse(data)
+
+	if (!isValid) return res.status(400).json(errors)
+
+	let tags = data.tags.split(",").map(tag => tag.trim().toLowerCase())
+
+	const course = {
+		title: data.title,
+		description: data.description,
+		link: data.link,
+		tags: tags
+	}
+
+	Course.findByIdAndUpdate(id, { ...course })
+		.then(course => {
+			res.json(course)
+		})
+		.catch(err => console.log(err))
+})
+
 // @route   DELETE api/courses/:id
 // @desc    Delete a course
 // @access  Public

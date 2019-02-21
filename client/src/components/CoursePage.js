@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 import { getCourseById } from "../actions/courseActions"
 import { Container, Row, Col } from "reactstrap"
+import { Link } from "react-router-dom"
 
 import "../assets/css/Course.css"
 
@@ -12,18 +13,19 @@ class Course extends Component {
 
 	render() {
 		if (this.props.course.loading === true) {
-			return (
-				<img src={require("../assets/img/loading.gif")} alt="Chargement..." />
-			)
+			return <React.Fragment />
 		}
 
 		const { course } = this.props.course
 
 		return (
-			<Container className="h-100">
-				<Row className="text-center h-100">
-					<Col className="my-auto" xs="12">
-						<h1>{course.title}</h1>
+			<Container className="d-flex h-100">
+				<Row className="text-center justify-content-center align-self-center mx-auto">
+					<Col className="h-100">
+						<h1 className="display-4 m-0">{course.title}</h1>
+						<h5 className="mb-4">
+							{new Date(course.date).toLocaleDateString()}
+						</h5>
 						<iframe
 							title="youtube"
 							src={
@@ -35,6 +37,11 @@ class Course extends Component {
 							allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
 							allowFullScreen
 						/>
+						<br />
+						<p>
+							{course.tags &&
+								course.tags.map(tag => <Link to={`/tag/${tag}`}>#{tag} </Link>)}
+						</p>
 					</Col>
 				</Row>
 			</Container>
