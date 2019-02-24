@@ -17,8 +17,10 @@ mongoose
 	.then(() => console.log("Logged into MongoDB !"))
 	.catch(err => console.log("An error has occured", err))
 
-app.listen(1234, () => {
-	console.log("Listening on port 1234 !")
+const port = process.env.PORT || 1234
+
+app.listen(port, () => {
+	console.log(`Listening on port ${port} !`)
 })
 
 // API routes

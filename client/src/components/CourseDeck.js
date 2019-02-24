@@ -1,17 +1,8 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import { getCourses } from "../actions/courseActions"
-import {
-	Col,
-	Card,
-	CardImg,
-	CardText,
-	CardBody,
-	CardTitle,
-	CardSubtitle,
-	Button
-} from "reactstrap"
-import { Link } from "react-router-dom"
+import { Row, Col } from "reactstrap"
+import CourseCard from "./CourseCard"
 
 class CourseDeck extends Component {
 	componentDidMount() {
@@ -21,43 +12,19 @@ class CourseDeck extends Component {
 	render() {
 		const { courses } = this.props.course
 		return (
-			<React.Fragment>
+			<Row>
 				{courses &&
-					courses.map(course => (
-						<Col key={course._id} md="6" lg="4" className="align-items-stretch">
-							<Card>
-								<CardImg
-									top
-									src={`http://img.youtube.com/vi/${
-										course.link
-									}/maxresdefault.jpg`}
-								/>
-								<CardBody>
-									<CardTitle>
-										{course.title}{" "}
-										<span className="card-clicks">
-											(vu {course.clicks} fois)
-										</span>
-									</CardTitle>
-									<CardSubtitle>
-										{new Date(course.date).toLocaleDateString()}
-									</CardSubtitle>
-									<CardText>
-										{course.description}
-										<br />
-										{course.tags &&
-											course.tags.map(tag => (
-												<Link to={`/tag/${tag}`}>#{tag} </Link>
-											))}
-									</CardText>
-									<Link to={`/course/id/${course._id}`}>
-										<Button color="primary">Voir le cours</Button>
-									</Link>
-								</CardBody>
-							</Card>
+					courses.slice(0, 3).map(course => (
+						<Col
+							key={course._id}
+							md="6"
+							lg="4"
+							className="align-items-stretch d-flex"
+						>
+							<CourseCard course={course} />
 						</Col>
 					))}
-			</React.Fragment>
+			</Row>
 		)
 	}
 }

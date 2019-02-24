@@ -19,7 +19,7 @@ router.get("/:filter?", (req, res) => {
 	Course.find()
 		.sort(filter)
 		.then(courses => res.json(courses))
-		.catch(err => console.log(err))
+		.catch(err => console.error(err))
 })
 
 // @route   GET api/courses/id/:id
@@ -32,7 +32,49 @@ router.get("/id/:id", (req, res) => {
 		}
 	})
 		.then(course => res.json(course))
-		.catch(err => console.log(err))
+		.catch(err => console.error(err))
+})
+
+// @route		GET api/courses/prev/:id
+// @desc		Get the previous course
+// @access	Public
+router.get("/prev/:id", (req, res) => {
+	const id = req.params.id
+	Course.findOne({
+		_id: {
+			$lt: id
+		}
+	})
+		.sort({ _id: -1 })
+		.then(course => {
+			if (course) {
+				res.json(course)
+			} else {
+				res.json({})
+			}
+		})
+		.catch(err => console.error(err))
+})
+
+// @route		GET api/courses/next/:id
+// @desc		Get the next course
+// @access	Public
+router.get("/next/:id", (req, res) => {
+	const id = req.params.id
+	Course.findOne({
+		_id: {
+			$gt: id
+		}
+	})
+		.sort({ _id: 1 })
+		.then(course => {
+			if (course) {
+				res.json(course)
+			} else {
+				res.json({})
+			}
+		})
+		.catch(err => console.error(err))
 })
 
 // @route   POST api/courses
@@ -57,7 +99,7 @@ router.post("/", (req, res) => {
 	course
 		.save()
 		.then(course => res.json(course))
-		.catch(err => console.log(err))
+		.catch(err => console.error(err))
 })
 
 // @route   POST api/courses/:id
@@ -84,19 +126,21 @@ router.post("/:id", (req, res) => {
 		.then(course => {
 			res.json(course)
 		})
-		.catch(err => console.log(err))
+		.catch(err => console.error(err))
 })
 
 // @route   DELETE api/courses/:id
 // @desc    Delete a course
 // @access  Public
 router.delete("/:id", (req, res) => {
-	Course.findById(req.params.id).then(course =>
-		course
-			.remove()
-			.then(() => res.json({ success: true }))
-			.catch(err => res.status(404).json({ success: false }))
-	)
+	Course.findById(req.params.id)
+		.then(course =>
+			course
+				.remove()
+				.then(() => res.json({ success: true }))
+				.catch(err => res.status(404).json({ success: false }))
+		)
+		.catch(err => console.error(err))
 })
 
 module.exports = router

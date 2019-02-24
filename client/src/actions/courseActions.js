@@ -5,6 +5,8 @@ import {
 	DELETE_COURSE,
 	EDIT_COURSE,
 	LOADING_COURSE,
+	GET_PREVIOUS_COURSE,
+	GET_NEXT_COURSE,
 	ERROR
 } from "./types"
 import axios from "axios"
@@ -18,7 +20,7 @@ export const getCourses = () => dispatch => {
 				payload: res.data
 			})
 		)
-		.catch(err => console.log(err))
+		.catch(err => console.error(err))
 }
 
 export const getCoursesByTag = tag => dispatch => {
@@ -30,7 +32,7 @@ export const getCoursesByTag = tag => dispatch => {
 				payload: res.data
 			})
 		)
-		.catch(err => console.log(err))
+		.catch(err => console.error(err))
 }
 
 export const getCourseById = id => dispatch => {
@@ -45,7 +47,31 @@ export const getCourseById = id => dispatch => {
 				payload: res.data
 			})
 		})
-		.catch(err => console.log(err))
+		.catch(err => console.error(err))
+}
+
+export const getPreviousCourse = id => dispatch => {
+	axios
+		.get(`/api/courses/prev/${id}`)
+		.then(res => {
+			dispatch({
+				type: GET_PREVIOUS_COURSE,
+				payload: res.data
+			})
+		})
+		.catch(err => console.error(err))
+}
+
+export const getNextCourse = id => dispatch => {
+	axios
+		.get(`/api/courses/next/${id}`)
+		.then(res => {
+			dispatch({
+				type: GET_NEXT_COURSE,
+				payload: res.data
+			})
+		})
+		.catch(err => console.error(err))
 }
 
 export const addCourse = (course, history) => dispatch => {
