@@ -1,29 +1,47 @@
 import React, { Component } from "react"
 import CourseDeck from "./CourseDeck"
-import { Row, Container, Col } from "reactstrap"
-import "../assets/css/Home.css"
+import { withStyles } from "@material-ui/core/styles"
+import Grid from "@material-ui/core/Grid"
+import Typography from "@material-ui/core/Typography"
+
+const styles = theme => ({
+	header: {
+		textAlign: "center"
+	}
+})
 
 class Home extends Component {
 	render() {
+		const { classes } = this.props
+
 		return (
-			<Container>
-				<Row>
-					<Col className="text-center">
-						<h1 className="display-3 py-4">Mini-Collel</h1>
-						<hr className="w-25 pb-4" />
-					</Col>
-				</Row>
-				<Row>
-					<Col className="text-center">
-						<h4 className="display-4 pb-4">Les derniers cours</h4>
-					</Col>
-				</Row>
-				<Row>
+			<Grid container spacing={24}>
+				<Grid item xs={12}>
+					<Typography
+						className={classes.header}
+						component="h1"
+						variant="h1"
+						gutterBottom
+					>
+						Mini-Collel
+					</Typography>
+				</Grid>
+				<Grid item xs={12}>
+					<Typography
+						className={classes.header}
+						component="h3"
+						variant="h3"
+						gutterBottom
+					>
+						Les derniers cours
+					</Typography>
+				</Grid>
+				<Grid item>
 					<CourseDeck />
-				</Row>
-			</Container>
+				</Grid>
+			</Grid>
 		)
 	}
 }
 
-export default Home
+export default withStyles(styles)(Home)

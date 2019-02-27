@@ -5,10 +5,7 @@ import {
 	getPreviousCourse,
 	getNextCourse
 } from "../actions/courseActions"
-import { Container, Row, Col } from "reactstrap"
 import { Link } from "react-router-dom"
-
-import "../assets/css/Course.css"
 
 class Course extends Component {
 	componentDidMount() {
@@ -33,7 +30,8 @@ class Course extends Component {
 		const { course, prev, next } = this.props.course
 
 		return (
-			<Container className="d-flex h-100 container-fluid">
+			<React.Fragment />
+			/*<Container className="d-flex h-100 container-fluid">
 				<Row className="text-center justify-content-center align-self-center mx-auto">
 					<Col xs={12} className="h-100">
 						<h1 className="display-4 m-0">{course.title}</h1>
@@ -60,7 +58,7 @@ class Course extends Component {
 						</p>
 					</Col>
 				</Row>
-			</Container>
+			</Container>*/
 		)
 	}
 }

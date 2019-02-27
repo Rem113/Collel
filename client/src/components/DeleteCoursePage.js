@@ -1,15 +1,5 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import {
-	Row,
-	Col,
-	Container,
-	Button,
-	ListGroup,
-	ListGroupItem,
-	ListGroupItemHeading,
-	ListGroupItemText
-} from "reactstrap"
 import { getCourses, deleteCourse } from "../actions/courseActions"
 import { Link } from "react-router-dom"
 
@@ -22,7 +12,8 @@ class DeleteCoursePage extends Component {
 		const { courses } = this.props.course
 
 		return (
-			<Container>
+			<React.Fragment />
+			/*<Container>
 				<h1 className="display-3 text-center my-4">Supprimer un cours</h1>
 				<ListGroup>
 					{courses &&
@@ -50,7 +41,7 @@ class DeleteCoursePage extends Component {
 							</ListGroupItem>
 						))}
 				</ListGroup>
-			</Container>
+			</Container>*/
 		)
 	}
 }

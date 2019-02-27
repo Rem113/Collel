@@ -1,13 +1,4 @@
 import React, { Component } from "react"
-import {
-	Col,
-	Button,
-	Form,
-	FormGroup,
-	Label,
-	Input,
-	FormText
-} from "reactstrap"
 
 class CourseForm extends Component {
 	constructor(props) {
@@ -46,7 +37,8 @@ class CourseForm extends Component {
 
 	render() {
 		return (
-			<Col className="mx-auto" sm={8}>
+			<React.Fragment />
+			/*<Col className="mx-auto" sm={8}>
 				<Form onSubmit={this.onSubmit}>
 					<FormGroup row>
 						<Label for="title" sm={2}>
@@ -150,7 +142,7 @@ class CourseForm extends Component {
 						<Button color="dark">Envoyer</Button>
 					</FormGroup>
 				</Form>
-			</Col>
+			</Col>*/
 		)
 	}
 }

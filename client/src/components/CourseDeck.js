@@ -1,8 +1,8 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import { getCourses } from "../actions/courseActions"
-import { Row, Col } from "reactstrap"
 import CourseCard from "./CourseCard"
+import Grid from "@material-ui/core/Grid"
 
 class CourseDeck extends Component {
 	componentDidMount() {
@@ -12,19 +12,14 @@ class CourseDeck extends Component {
 	render() {
 		const { courses } = this.props.course
 		return (
-			<Row>
+			<Grid container direction="row" justify="center">
 				{courses &&
 					courses.slice(0, 3).map(course => (
-						<Col
-							key={course._id}
-							md="6"
-							lg="4"
-							className="align-items-stretch d-flex"
-						>
+						<Grid item xs={12} key={course._id}>
 							<CourseCard course={course} />
-						</Col>
+						</Grid>
 					))}
-			</Row>
+			</Grid>
 		)
 	}
 }

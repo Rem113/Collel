@@ -1,5 +1,4 @@
 import React, { Component } from "react"
-import { ListGroup, Container } from "reactstrap"
 import CourseListItem from "./CourseListItem"
 import { connect } from "react-redux"
 import { getCourses, getCoursesByTag } from "../actions/courseActions"
@@ -22,7 +21,8 @@ class CourseList extends Component {
 
 	render() {
 		return (
-			<Container>
+			<React.Fragment />
+			/*<Container>
 				<h1 className="display-3 text-center my-4">Liste des cours</h1>
 				{this.props.tag && (
 					<h3 className="text-center mb-4">
@@ -32,13 +32,42 @@ class CourseList extends Component {
 						)}
 					</h3>
 				)}
-				<ListGroup flush>
+				<ListGroup>
 					{this.props.course.courses &&
 						this.props.course.courses.map(course => (
 							<CourseListItem course={course} />
 						))}
 				</ListGroup>
-			</Container>
+				<Pagination>
+					<PaginationItem disabled>
+						<PaginationLink first>First</PaginationLink>
+					</PaginationItem>
+					<PaginationItem disabled>
+						<PaginationLink previous />
+					</PaginationItem>
+					<PaginationItem active>
+						<PaginationLink>1</PaginationLink>
+					</PaginationItem>
+					<PaginationItem>
+						<PaginationLink>2</PaginationLink>
+					</PaginationItem>
+					<PaginationItem>
+						<PaginationLink>3</PaginationLink>
+					</PaginationItem>
+					<PaginationItem>
+						<PaginationLink>4</PaginationLink>
+					</PaginationItem>
+					<PaginationItem>
+						<PaginationLink>5</PaginationLink>
+					</PaginationItem>
+					<PaginationItem>
+						<PaginationLink next />
+					</PaginationItem>
+					<PaginationItem>
+						<PaginationLink last>Last</PaginationLink>
+					</PaginationItem>
+				</Pagination>
+			</Container>*/
 		)
 	}
 }

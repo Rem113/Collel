@@ -1,12 +1,12 @@
 import React, { Component } from "react"
-import { ListGroupItem, ListGroupItemText, Row, Col, Button } from "reactstrap"
 import { Link } from "react-router-dom"
 
 class CourseListItem extends Component {
 	render() {
 		const { course } = this.props
 		return (
-			<React.Fragment>
+			<React.Fragment />
+			/*<React.Fragment>
 				<ListGroupItem className="p-4">
 					<Row>
 						<Col md={6} lg={4} className="my-auto">
@@ -19,7 +19,10 @@ class CourseListItem extends Component {
 							/>
 						</Col>
 						<Col className="p-4 my-auto">
-							<h3 className="m-0">{course.title}</h3>
+							<h3 className="m-0">
+								{course.title}{" "}
+								<span className="card-clicks">(vu {course.clicks} fois)</span>
+							</h3>
 							<small style={{ color: "#AAA" }}>
 								{new Date(course.date).toLocaleDateString()}
 							</small>
@@ -38,7 +41,7 @@ class CourseListItem extends Component {
 						</Col>
 					</Row>
 				</ListGroupItem>
-			</React.Fragment>
+			</React.Fragment>*/
 		)
 	}
 }

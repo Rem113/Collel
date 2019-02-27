@@ -17,9 +17,8 @@ const Root = ({ store }) => (
 				<Route exact path="/course/add" component={AddCoursePage} />
 				<Route exact path="/course/id/:id" component={CoursePage} />
 				<Route exact path="/tag/:tag/:filter?" component={CourseList} />
-				<Route exact path="/course/delete" component={DeleteCoursePage} />
+				<Route exact path="/course/list" component={DeleteCoursePage} />
 				<Route exact path="/course/edit/:id" component={EditCoursePage} />
-				<Route exact path="/course/list" component={CourseList} />
 			</div>
 		</Router>
 	</Provider>
