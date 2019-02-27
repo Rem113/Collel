@@ -17,6 +17,10 @@ mongoose
 	.then(() => console.log("Logged into MongoDB !"))
 	.catch(err => console.log("An error has occured", err))
 
+// API routes
+app.use("/api/courses", courses)
+app.use("/api/tags/", tags)
+
 // Server static assets if in production
 if (process.env.NODE_ENV === "production") {
 	// Set static folder
@@ -32,7 +36,3 @@ const port = process.env.PORT || 1234
 app.listen(port, () => {
 	console.log(`Listening on port ${port} !`)
 })
-
-// API routes
-app.use("/api/courses", courses)
-app.use("/api/tags/", tags)
