@@ -2,6 +2,7 @@ const express = require("express")
 const mongoose = require("mongoose")
 const courses = require("./routes/api/courses")
 const tags = require("./routes/api/tags")
+const path = require("path")
 
 const app = express()
 
