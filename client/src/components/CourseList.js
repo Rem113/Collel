@@ -7,18 +7,31 @@ import { withRouter } from "react-router-dom"
 
 class CourseList extends Component {
 	componentDidMount() {
-		if (this.props.tag) this.props.getCoursesByTag(this.props.tag)
-		else this.props.getCourses()
+		this.getCourses()
 	}
 
 	componentWillReceiveProps(nextProps) {
-		if (this.props.tag) this.props.getCoursesByTag(this.props.tag)
-		else this.props.getCourses()
+		this.getCourses()
+	}
+
+	getCourses = () => {
+		if (this.props.tag)
+			this.props.getCoursesByTag(this.props.tag, this.props.filter)
+		else this.props.getCourses(this.props.filter)
 	}
 
 	render() {
 		return (
 			<Container>
+				<h1 className="display-3 text-center my-4">Liste des cours</h1>
+				{this.props.tag && (
+					<h3 className="text-center mb-4">
+						avec le tag #{this.props.tag}
+						{this.props.filter && (
+							<React.Fragment>, trié par {this.props.filter}</React.Fragment>
+						)}
+					</h3>
+				)}
 				<ListGroup flush>
 					{this.props.course.courses &&
 						this.props.course.courses.map(course => (
@@ -32,7 +45,8 @@ class CourseList extends Component {
 
 const mapStateToProps = (state, ownProps) => ({
 	course: state.course,
-	tag: ownProps.match.params.tag
+	tag: ownProps.match.params.tag ? ownProps.match.params.tag : "",
+	filter: ownProps.match.params.filter ? ownProps.match.params.filter : ""
 })
 
 export default connect(
