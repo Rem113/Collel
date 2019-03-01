@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import CourseListItem from "./CourseListItem"
 import { connect } from "react-redux"
-import { getCourses, getCoursesByTag } from "../actions/courseActions"
+import { getCourses, getCoursesByTag } from "../../actions/courseActions"
 import { withRouter } from "react-router-dom"
 
 class CourseList extends Component {

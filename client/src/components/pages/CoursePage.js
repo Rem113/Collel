@@ -4,7 +4,7 @@ import {
 	getCourseById,
 	getPreviousCourse,
 	getNextCourse
-} from "../actions/courseActions"
+} from "../../actions/courseActions"
 import { Link } from "react-router-dom"
 
 class Course extends Component {

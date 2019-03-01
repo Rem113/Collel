@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import { getCourses, deleteCourse } from "../actions/courseActions"
+import { getCourses, deleteCourse } from "../../actions/courseActions"
 import { Link } from "react-router-dom"
 
 class DeleteCoursePage extends Component {

@@ -1,8 +1,8 @@
 import React, { Component } from "react"
-import { addCourse } from "../actions/courseActions"
+import { addCourse } from "../../actions/courseActions"
 import { connect } from "react-redux"
 import { withRouter } from "react-router-dom"
-import CourseForm from "./CourseForm"
+import CourseForm from "../controls/CourseForm"
 
 class AddCoursePage extends Component {
 	onSubmit = course => {

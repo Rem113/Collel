@@ -1,7 +1,7 @@
 import React, { Component } from "react"
-import CourseForm from "./CourseForm"
+import CourseForm from "../controls/CourseForm"
 import { connect } from "react-redux"
-import { getCourseById, editCourse } from "../actions/courseActions"
+import { getCourseById, editCourse } from "../../actions/courseActions"
 import { withRouter } from "react-router-dom"
 
 class EditCoursePage extends Component {

@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import { getCourses } from "../actions/courseActions"
+import { getCourses } from "../../actions/courseActions"
 import CourseCard from "./CourseCard"
 import Grid from "@material-ui/core/Grid"
 
