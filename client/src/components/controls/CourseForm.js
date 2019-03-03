@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+import { Grid, TextField, Button } from "@material-ui/core"
 
 class CourseForm extends Component {
 	constructor(props) {
@@ -8,7 +9,7 @@ class CourseForm extends Component {
 			...this.props.course,
 			tags: this.props.course
 				? this.props.course.tags
-					? this.props.course.tags.join(",")
+					? this.props.course.tags.join(", ")
 					: ""
 				: ""
 		}
@@ -36,113 +37,71 @@ class CourseForm extends Component {
 	}
 
 	render() {
+		const { errors } = this.props
+
 		return (
-			<React.Fragment />
-			/*<Col className="mx-auto" sm={8}>
-				<Form onSubmit={this.onSubmit}>
-					<FormGroup row>
-						<Label for="title" sm={2}>
-							Titre
-						</Label>
-						<Col sm={10}>
-							<Input
-								type="text"
+			<Grid container justify="center" alignContent="center">
+				<Grid item xs={9} md={6}>
+					<Grid container>
+						<Grid item xs={12}>
+							<TextField
 								name="title"
-								placeholder="Titre"
+								variant="outlined"
+								label="Titre"
+								margin="dense"
 								value={this.state.title}
 								onChange={this.onChange}
-								className={
-									this.props.errors
-										? this.props.errors.title
-											? "is-invalid"
-											: ""
-										: ""
-								}
+								fullWidth
+								errors={errors.title}
 							/>
-							{this.props.errors && (
-								<small className="invalid-feedback">
-									{this.props.errors.title}
-								</small>
-							)}
-						</Col>
-					</FormGroup>
-					<FormGroup row>
-						<Label for="description" sm={2}>
-							Description
-						</Label>
-						<Col sm={10}>
-							<Input
-								type="textarea"
+						</Grid>
+						<Grid item xs={12}>
+							<TextField
 								name="description"
-								rows="5"
-								placeholder="Description"
+								variant="outlined"
+								label="Description"
+								margin="dense"
 								value={this.state.description}
 								onChange={this.onChange}
-								className={
-									this.props.errors
-										? this.props.errors.description
-											? "is-invalid"
-											: ""
-										: ""
-								}
+								fullWidth
+								multiline
+								rows={3}
+								errors={errors.description}
 							/>
-						</Col>
-					</FormGroup>
-					<FormGroup row>
-						<Label for="link" sm={2}>
-							Lien
-						</Label>
-						<Col sm={10}>
-							<Input
-								type="text"
+						</Grid>
+						<Grid item xs={12}>
+							<TextField
 								name="link"
-								placeholder="Lien"
+								variant="outlined"
+								label="Lien"
+								margin="dense"
 								value={this.state.link}
 								onChange={this.onChange}
-								className={
-									this.props.errors
-										? this.props.errors.link
-											? "is-invalid"
-											: ""
-										: ""
-								}
+								fullWidth
+								errors={errors.link}
 							/>
-							{this.props.errors && (
-								<small className="invalid-feedback">
-									{this.props.errors.link}
-								</small>
-							)}
-						</Col>
-					</FormGroup>
-					<FormGroup row>
-						<Label for="tags" sm={2}>
-							Tags
-						</Label>
-						<Col sm={10}>
-							<Input
-								type="text"
+						</Grid>
+						<Grid item xs={12}>
+							<TextField
 								name="tags"
-								placeholder="Tags"
+								variant="outlined"
+								label="Tags"
+								margin="dense"
+								helperText="Entrez des tags, séparés par une virgule"
 								value={this.state.tags}
 								onChange={this.onChange}
-								className={
-									this.props.errors
-										? this.props.errors.tags
-											? "is-invalid"
-											: ""
-										: ""
-								}
+								fullWidth
+								errors={errors.tags}
 							/>
-							<FormText color="muted">
-								Entrez des tags, séparés par une virgule
-							</FormText>
-						</Col>
-					</FormGroup>
-					<FormGroup className="text-center">
-						<Button color="dark">Envoyer</Button>
-					</FormGroup>
-				</Form>
-			</Col>*/
+						</Grid>
+						<Grid item align="center" xs={12}>
+							<Button variant="raised" color="primary" onClick={this.onSubmit}>
+								Envoyer
+							</Button>
+						</Grid>
+					</Grid>
+				</Grid>
+			</Grid>
 		)
 	}
 }

@@ -1,8 +1,16 @@
 import React, { Component } from "react"
+import { Grid, Typography } from "@material-ui/core"
+import { withStyles } from "@material-ui/core/styles"
 import CourseForm from "../controls/CourseForm"
 import { connect } from "react-redux"
 import { getCourseById, editCourse } from "../../actions/courseActions"
 import { withRouter } from "react-router-dom"
+
+const style = theme => ({
+	root: {
+		height: "100%"
+	}
+})
 
 class EditCoursePage extends Component {
 	componentDidMount() {
@@ -21,15 +29,28 @@ class EditCoursePage extends Component {
 				</div>
 			)
 
+		const { classes } = this.props
+
 		return (
-			<div>
-				<h1 className="display-3 text-center my-4">Modifier un cours</h1>
-				<CourseForm
-					course={this.props.course.course}
-					onSubmit={this.onSubmit}
-					errors={this.props.course.errors}
-				/>
-			</div>
+			<Grid
+				container
+				justify="center"
+				alignContent="center"
+				className={classes.root}
+			>
+				<Grid item align="center" xs={12}>
+					<Typography variant="h3" component="h3" gutterBottom>
+						Modifier un cours
+					</Typography>
+				</Grid>
+				<Grid item xs={12}>
+					<CourseForm
+						course={this.props.course.course}
+						onSubmit={this.onSubmit}
+						errors={this.props.course.errors}
+					/>
+				</Grid>
+			</Grid>
 		)
 	}
 }
@@ -42,4 +63,4 @@ const mapStateToProps = (state, ownProps) => ({
 export default connect(
 	mapStateToProps,
 	{ getCourseById, editCourse }
-)(withRouter(EditCoursePage))
+)(withRouter(withStyles(style)(EditCoursePage)))

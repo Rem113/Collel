@@ -1,8 +1,16 @@
 import React, { Component } from "react"
+import { Grid, Typography } from "@material-ui/core"
+import { withStyles } from "@material-ui/core/styles"
 import { addCourse } from "../../actions/courseActions"
 import { connect } from "react-redux"
 import { withRouter } from "react-router-dom"
 import CourseForm from "../controls/CourseForm"
+
+const style = theme => ({
+	root: {
+		height: "100%"
+	}
+})
 
 class AddCoursePage extends Component {
 	onSubmit = course => {
@@ -10,15 +18,27 @@ class AddCoursePage extends Component {
 	}
 
 	render() {
+		const { classes } = this.props
+
 		return (
-			<React.Fragment />
-			/*<Container>
-				<h1 className="display-3 text-center my-4">Ajouter un cours</h1>
-				<CourseForm
-					onSubmit={this.onSubmit}
-					errors={this.props.course.errors}
-				/>
-			</Container>*/
+			<Grid
+				container
+				justify="center"
+				alignContent="center"
+				className={classes.root}
+			>
+				<Grid item align="center" xs={12}>
+					<Typography variant="h3" component="h3" gutterBottom>
+						Ajouter un cours
+					</Typography>
+				</Grid>
+				<Grid item xs={12}>
+					<CourseForm
+						onSubmit={this.onSubmit}
+						errors={this.props.course.errors}
+					/>
+				</Grid>
+			</Grid>
 		)
 	}
 }
@@ -30,4 +50,4 @@ const mapStateToProps = state => ({
 export default connect(
 	mapStateToProps,
 	{ addCourse }
-)(withRouter(AddCoursePage))
+)(withRouter(withStyles(style)(AddCoursePage)))
