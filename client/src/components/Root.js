@@ -4,7 +4,7 @@ import { Provider } from "react-redux"
 import { BrowserRouter as Router, Route } from "react-router-dom"
 import Home from "./pages/Home"
 import Course from "./pages/Course"
-import AddCoursePage from "./pages/AddCoursePage"
+import AddCourse from "./pages/AddCourse"
 import DeleteCoursePage from "./pages/DeleteCoursePage"
 import EditCoursePage from "./pages/EditCoursePage"
 import CourseList from "./controls/CourseList"
@@ -18,7 +18,7 @@ const Root = ({ store }) => (
 			<Router>
 				<React.Fragment>
 					<Route exact path="/" component={Home} />
-					<Route exact path="/course/add" component={AddCoursePage} />
+					<Route exact path="/course/add" component={AddCourse} />
 					<Route exact path="/course/id/:id" component={Course} />
 					<Route exact path="/tag/:tag/:filter?" component={CourseList} />
 					<Route exact path="/course/list" component={DeleteCoursePage} />
