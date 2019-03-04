@@ -64,14 +64,14 @@ class CourseCard extends Component {
 						<Typography component="p">{course.description}</Typography>
 						<br />
 						{course.tags.map(tag => (
-							<Link key={tag} className={classes.tag} to={`tags/${tag}`}>
+							<Link key={tag} className={classes.tag} to={`/tags/${tag}`}>
 								#{tag}{" "}
 							</Link>
 						))}
 					</CardContent>
 				</CardActionArea>
 				<CardActions className={classes.cardActions}>
-					<Link className={classes.button} to={`course/id/${course._id}`}>
+					<Link className={classes.button} to={`/course/id/${course._id}`}>
 						<Button size="medium" color="primary">
 							Voir le cours
 						</Button>

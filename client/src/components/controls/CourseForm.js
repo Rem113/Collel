@@ -95,7 +95,11 @@ class CourseForm extends Component {
 							/>
 						</Grid>
 						<Grid item align="center" xs={12}>
-							<Button variant="raised" color="primary" onClick={this.onSubmit}>
+							<Button
+								variant="contained"
+								color="primary"
+								onClick={this.onSubmit}
+							>
 								Envoyer
 							</Button>
 						</Grid>

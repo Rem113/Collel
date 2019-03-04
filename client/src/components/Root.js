@@ -7,7 +7,7 @@ import Course from "./pages/Course"
 import AddCourse from "./pages/AddCourse"
 import DeleteCoursePage from "./pages/DeleteCoursePage"
 import EditCourse from "./pages/EditCourse"
-import CourseList from "./controls/CourseList"
+import CourseList from "./pages/CourseList"
 import HomeFab from "./controls/HomeFab"
 import theme from "../theme"
 import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider"
@@ -21,7 +21,7 @@ const Root = ({ store }) => (
 					<Route exact path="/course/add" component={AddCourse} />
 					<Route exact path="/course/id/:id" component={Course} />
 					<Route exact path="/tag/:tag/:filter?" component={CourseList} />
-					<Route exact path="/course/list" component={DeleteCoursePage} />
+					<Route exact path="/course/list" component={CourseList} />
 					<Route exact path="/course/edit/:id" component={EditCourse} />
 					<HomeFab />
 				</React.Fragment>
