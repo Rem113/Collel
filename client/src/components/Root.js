@@ -2,27 +2,33 @@ import React from "react"
 import PropTypes from "prop-types"
 import { Provider } from "react-redux"
 import { BrowserRouter as Router, Route } from "react-router-dom"
-import HomePage from "./HomePage"
-import CoursePage from "./CoursePage"
-import AddCoursePage from "./AddCoursePage"
-import DeleteCoursePage from "./DeleteCoursePage"
-import EditCoursePage from "./EditCoursePage"
-import CourseList from "./CourseList"
+import Home from "./pages/Home"
+import Course from "./pages/Course"
+import AddCourse from "./pages/AddCourse"
+import ManageCourse from "./pages/ManageCourse"
+import EditCourse from "./pages/EditCourse"
+import CourseList from "./pages/CourseList"
+import HomeFab from "./controls/HomeFab"
+import theme from "../theme"
+import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider"
 
 const Root = ({ store }) => (
-	<Provider store={store}>
-		<Router>
-			<div className="h-100">
-				<Route exact path="/" component={HomePage} />
-				<Route exact path="/course/add" component={AddCoursePage} />
-				<Route exact path="/course/id/:id" component={CoursePage} />
-				<Route exact path="/tag/:tag/:filter?" component={CourseList} />
-				<Route exact path="/course/delete" component={DeleteCoursePage} />
-				<Route exact path="/course/edit/:id" component={EditCoursePage} />
-				<Route exact path="/course/list" component={CourseList} />
-			</div>
-		</Router>
-	</Provider>
+	<MuiThemeProvider theme={theme}>
+		<Provider store={store}>
+			<Router>
+				<React.Fragment>
+					<Route exact path="/" component={Home} />
+					<Route exact path="/course/add" component={AddCourse} />
+					<Route exact path="/course/id/:id" component={Course} />
+					<Route exact path="/tag/:tag/:filter?" component={CourseList} />
+					<Route exact path="/course/list" component={CourseList} />
+					<Route exact path="/course/edit/:id" component={EditCourse} />
+					<Route exact path="/course/manage" component={ManageCourse} />
+					<HomeFab />
+				</React.Fragment>
+			</Router>
+		</Provider>
+	</MuiThemeProvider>
 )
 
 Root.propTypes = {

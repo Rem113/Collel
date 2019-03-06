@@ -1,8 +1,9 @@
 import React, { Component } from "react"
-import { ListGroup, Container } from "reactstrap"
-import CourseListItem from "./CourseListItem"
+import Header from "../controls/Header"
+import CourseListItem from "../controls/CourseListItem"
+import { List } from "@material-ui/core"
 import { connect } from "react-redux"
-import { getCourses, getCoursesByTag } from "../actions/courseActions"
+import { getCourses, getCoursesByTag } from "../../actions/courseActions"
 import { withRouter } from "react-router-dom"
 
 class CourseList extends Component {
@@ -22,23 +23,14 @@ class CourseList extends Component {
 
 	render() {
 		return (
-			<Container>
-				<h1 className="display-3 text-center my-4">Liste des cours</h1>
-				{this.props.tag && (
-					<h3 className="text-center mb-4">
-						avec le tag #{this.props.tag}
-						{this.props.filter && (
-							<React.Fragment>, trié par {this.props.filter}</React.Fragment>
-						)}
-					</h3>
-				)}
-				<ListGroup flush>
-					{this.props.course.courses &&
-						this.props.course.courses.map(course => (
-							<CourseListItem course={course} />
-						))}
-				</ListGroup>
-			</Container>
+			<React.Fragment>
+				<Header />
+				<List>
+					{this.props.course.courses.map(course => (
+						<CourseListItem course={course} />
+					))}
+				</List>
+			</React.Fragment>
 		)
 	}
 }
