@@ -5,6 +5,7 @@ import { addCourse } from "../../actions/courseActions"
 import { connect } from "react-redux"
 import { withRouter } from "react-router-dom"
 import CourseForm from "../controls/CourseForm"
+import Subtitle from "../controls/Subtitle"
 
 const style = theme => ({
 	root: {
@@ -28,9 +29,7 @@ class AddCoursePage extends Component {
 				className={classes.root}
 			>
 				<Grid item align="center" xs={12}>
-					<Typography variant="h3" component="h3" gutterBottom>
-						Ajouter un cours
-					</Typography>
+					<Subtitle caption="Ajouter un cours" />
 				</Grid>
 				<Grid item xs={12}>
 					<CourseForm

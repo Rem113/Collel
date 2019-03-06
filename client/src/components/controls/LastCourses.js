@@ -6,21 +6,14 @@ import CourseCard from "./CourseCard"
 import { withStyles } from "@material-ui/core/styles"
 import { getCourses } from "../../actions/courseActions"
 import { Link } from "react-router-dom"
+import Subtitle from "./Subtitle"
 
 const style = theme => ({
-	title: {
-		marginBottom: theme.spacing.unit * 2
-	},
 	linkItem: {
 		margin: theme.spacing.unit * 2
 	},
 	link: {
 		textDecoration: "none"
-	},
-	hr: {
-		width: "5%",
-		borderColor: theme.palette.secondary.main,
-		border: "2px solid"
 	}
 })
 
@@ -38,14 +31,11 @@ class LastCourses extends Component {
 		return (
 			<Grid container>
 				<Grid item xs={12} className={classes.title}>
-					<Typography component="h3" variant="h3" align="center">
-						Les derniers cours
-					</Typography>
-					<hr className={classes.hr} />
+					<Subtitle caption="Les derniers cours" />
 				</Grid>
 				<Grid item xs={12}>
 					<Grid container spacing={24} justify="center">
-						{courses.map(course => (
+						{courses.slice(0, 4).map(course => (
 							<Grid key={course._id} item md={6} lg={3}>
 								<CourseCard course={course} />
 							</Grid>

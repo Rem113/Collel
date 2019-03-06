@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom"
 import Home from "./pages/Home"
 import Course from "./pages/Course"
 import AddCourse from "./pages/AddCourse"
-import DeleteCoursePage from "./pages/DeleteCoursePage"
+import ManageCourse from "./pages/ManageCourse"
 import EditCourse from "./pages/EditCourse"
 import CourseList from "./pages/CourseList"
 import HomeFab from "./controls/HomeFab"
@@ -23,6 +23,7 @@ const Root = ({ store }) => (
 					<Route exact path="/tag/:tag/:filter?" component={CourseList} />
 					<Route exact path="/course/list" component={CourseList} />
 					<Route exact path="/course/edit/:id" component={EditCourse} />
+					<Route exact path="/course/manage" component={ManageCourse} />
 					<HomeFab />
 				</React.Fragment>
 			</Router>

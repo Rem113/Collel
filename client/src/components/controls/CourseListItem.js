@@ -60,7 +60,7 @@ class CourseListItem extends Component {
 							<Grid item xs={12}>
 								<p>
 									{course.tags.map(tag => (
-										<Link to={`/tags/${tag}`} className={classes.tag}>
+										<Link to={`/tag/${tag}`} className={classes.tag}>
 											#{tag + " "}
 										</Link>
 									))}

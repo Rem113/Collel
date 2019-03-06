@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+import Header from "../controls/Header"
 import CourseListItem from "../controls/CourseListItem"
 import { List } from "@material-ui/core"
 import { connect } from "react-redux"
@@ -22,11 +23,14 @@ class CourseList extends Component {
 
 	render() {
 		return (
-			<List>
-				{this.props.course.courses.map(course => (
-					<CourseListItem course={course} />
-				))}
-			</List>
+			<React.Fragment>
+				<Header />
+				<List>
+					{this.props.course.courses.map(course => (
+						<CourseListItem course={course} />
+					))}
+				</List>
+			</React.Fragment>
 		)
 	}
 }

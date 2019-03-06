@@ -5,6 +5,7 @@ import CourseForm from "../controls/CourseForm"
 import { connect } from "react-redux"
 import { getCourseById, editCourse } from "../../actions/courseActions"
 import { withRouter } from "react-router-dom"
+import Subtitle from "../controls/Subtitle"
 
 const style = theme => ({
 	root: {
@@ -39,9 +40,7 @@ class EditCoursePage extends Component {
 				className={classes.root}
 			>
 				<Grid item align="center" xs={12}>
-					<Typography variant="h3" component="h3" gutterBottom>
-						Modifier un cours
-					</Typography>
+					<Subtitle caption="Modifier un cours" />
 				</Grid>
 				<Grid item xs={12}>
 					<CourseForm
