@@ -9,6 +9,7 @@ import {
 	getNextCourse
 } from "../../actions/courseActions"
 import { Link, withRouter } from "react-router-dom"
+import Loading from "../controls/Loading"
 
 const style = theme => ({
 	root: {
@@ -47,7 +48,7 @@ class Course extends Component {
 		const { classes } = this.props
 		const { course, prev, next, loading } = this.props.course
 
-		if (loading === true) return <React.Fragment />
+		if (loading === true) return <Loading />
 
 		const hasPrev = Object.getOwnPropertyNames(prev).length > 0
 		const hasNext = Object.getOwnPropertyNames(next).length > 0

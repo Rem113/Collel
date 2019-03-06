@@ -1,12 +1,13 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import { Button, Typography } from "@material-ui/core"
+import { Button } from "@material-ui/core"
 import Grid from "@material-ui/core/Grid"
 import CourseCard from "./CourseCard"
 import { withStyles } from "@material-ui/core/styles"
 import { getCourses } from "../../actions/courseActions"
 import { Link } from "react-router-dom"
 import Subtitle from "./Subtitle"
+import Loading from "./Loading"
 
 const style = theme => ({
 	linkItem: {
@@ -26,7 +27,7 @@ class LastCourses extends Component {
 		const { classes } = this.props
 		const { courses } = this.props.course
 
-		if (!courses) return <p>Loading...</p>
+		if (!courses) return <Loading />
 
 		return (
 			<Grid container>

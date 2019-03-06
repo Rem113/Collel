@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { Grid, Typography } from "@material-ui/core"
+import { Grid, CircularProgress } from "@material-ui/core"
 import { withStyles } from "@material-ui/core/styles"
 import CourseForm from "../controls/CourseForm"
 import { connect } from "react-redux"
@@ -23,14 +23,21 @@ class EditCoursePage extends Component {
 	}
 
 	render() {
+		const { classes } = this.props
+
 		if (this.props.course.loading)
 			return (
-				<div>
-					<p>Loading...</p>
-				</div>
+				<Grid
+					container
+					align="center"
+					alignContent="center"
+					className={classes.root}
+				>
+					<Grid item xs={12}>
+						<CircularProgress />
+					</Grid>
+				</Grid>
 			)
-
-		const { classes } = this.props
 
 		return (
 			<Grid
