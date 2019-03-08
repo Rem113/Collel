@@ -20,7 +20,6 @@ const Root = ({ store }) => (
 					<Route exact path="/" component={Home} />
 					<Route exact path="/course/add" component={AddCourse} />
 					<Route exact path="/course/id/:id" component={Course} />
-					<Route exact path="/tag/:tag/:filter?" component={CourseList} />
 					<Route exact path="/course/list" component={CourseList} />
 					<Route exact path="/course/edit/:id" component={EditCourse} />
 					<Route exact path="/course/manage" component={ManageCourse} />

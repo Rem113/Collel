@@ -7,25 +7,31 @@ import { getCourses } from "../../actions/courseActions"
 import { withRouter } from "react-router-dom"
 
 class CourseList extends Component {
-	componentDidMount() {
-		this.getCourses()
+	constructor(props) {
+		super(props)
+
+		if (!props.course.courses.length) props.getCourses()
+
+		this.state = {
+			filter: "",
+			tag: "",
+			page: 0
+		}
 	}
 
-	componentWillReceiveProps(nextProps) {
-		this.getCourses()
-	}
-
-	getCourses = () => {
-		this.props.getCourses(this.props.filter)
+	onTag = tag => {
+		this.setState({ tag })
 	}
 
 	render() {
+		if (this.props.course.courses.length === 0) return <p>Loading...</p>
+
 		return (
 			<React.Fragment>
 				<Header />
 				<List>
 					{this.props.course.courses.map(course => (
-						<CourseListItem course={course} />
+						<CourseListItem course={course} onTag={this.onTag} />
 					))}
 				</List>
 			</React.Fragment>
@@ -33,10 +39,8 @@ class CourseList extends Component {
 	}
 }
 
-const mapStateToProps = (state, ownProps) => ({
-	course: state.course,
-	tag: ownProps.match.params.tag ? ownProps.match.params.tag : "",
-	filter: ownProps.match.params.filter ? ownProps.match.params.filter : ""
+const mapStateToProps = state => ({
+	course: state.course
 })
 
 export default connect(
