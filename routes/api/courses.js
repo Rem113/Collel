@@ -4,20 +4,11 @@ const router = express.Router()
 const Course = require("../../models/Course")
 const courseValidator = require("../../validators/course")
 
-// @route   GET api/courses/:filter?
-// @desc    Get all courses (with filter)
+// @route   GET api/courses
+// @desc    Get all courses
 // @access  Public
-router.get("/:filter?", (req, res) => {
-	const filter = req.params.filter
-		? {
-				[req.params.filter]: -1
-		  }
-		: {
-				date: -1
-		  }
-
+router.get("/", (req, res) => {
 	Course.find()
-		.sort(filter)
 		.then(courses => res.json(courses))
 		.catch(err => console.error(err))
 })
