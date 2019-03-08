@@ -4,8 +4,8 @@ const router = express.Router()
 const Course = require("../../models/Course")
 const courseValidator = require("../../validators/course")
 
-// @route   GET api/courses
-// @desc    Get all courses
+// @route   GET api/course
+// @desc    Get all course
 // @access  Public
 router.get("/", (req, res) => {
 	Course.find()
@@ -13,62 +13,13 @@ router.get("/", (req, res) => {
 		.catch(err => console.error(err))
 })
 
-// @route   GET api/courses/id/:id
-// @desc    Get a specific course
-// @access  Public
 router.get("/id/:id", (req, res) => {
-	Course.findByIdAndUpdate(req.params.id, {
-		$inc: {
-			clicks: 1
-		}
-	})
-		.then(course => res.json(course))
-		.catch(err => console.error(err))
+	Course.findByIdAndUpdate(req.params.id, { $inc: { clicks: 1 } }).catch(err =>
+		console.error(err)
+	)
 })
 
-// @route		GET api/courses/prev/:id
-// @desc		Get the previous course
-// @access	Public
-router.get("/prev/:id", (req, res) => {
-	const id = req.params.id
-	Course.findOne({
-		_id: {
-			$lt: id
-		}
-	})
-		.sort({ _id: -1 })
-		.then(course => {
-			if (course) {
-				res.json(course)
-			} else {
-				res.json({})
-			}
-		})
-		.catch(err => console.error(err))
-})
-
-// @route		GET api/courses/next/:id
-// @desc		Get the next course
-// @access	Public
-router.get("/next/:id", (req, res) => {
-	const id = req.params.id
-	Course.findOne({
-		_id: {
-			$gt: id
-		}
-	})
-		.sort({ _id: 1 })
-		.then(course => {
-			if (course) {
-				res.json(course)
-			} else {
-				res.json({})
-			}
-		})
-		.catch(err => console.error(err))
-})
-
-// @route   POST api/courses
+// @route   POST api/course
 // @desc    Add a course
 // @access  Public
 router.post("/", (req, res) => {
@@ -93,7 +44,7 @@ router.post("/", (req, res) => {
 		.catch(err => console.error(err))
 })
 
-// @route   POST api/courses/:id
+// @route   POST api/course/:id
 // @desc    Edit a course
 // @access  Public
 router.post("/:id", (req, res) => {
@@ -120,7 +71,7 @@ router.post("/:id", (req, res) => {
 		.catch(err => console.error(err))
 })
 
-// @route   DELETE api/courses/:id
+// @route   DELETE api/course/:id
 // @desc    Delete a course
 // @access  Public
 router.delete("/:id", (req, res) => {

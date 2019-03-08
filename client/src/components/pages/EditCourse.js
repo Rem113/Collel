@@ -1,9 +1,9 @@
 import React, { Component } from "react"
-import { Grid, Typography } from "@material-ui/core"
+import { Grid } from "@material-ui/core"
 import { withStyles } from "@material-ui/core/styles"
 import CourseForm from "../controls/CourseForm"
 import { connect } from "react-redux"
-import { getCourseById, editCourse } from "../../actions/courseActions"
+import { editCourse } from "../../actions/courseActions"
 import { withRouter } from "react-router-dom"
 import Subtitle from "../controls/Subtitle"
 
@@ -14,9 +14,7 @@ const style = theme => ({
 })
 
 class EditCoursePage extends Component {
-	componentDidMount() {
-		this.props.getCourseById(this.props.id)
-	}
+	componentDidMount() {}
 
 	onSubmit = course => {
 		this.props.editCourse(this.props.id, course, this.props.history)
@@ -61,5 +59,5 @@ const mapStateToProps = (state, ownProps) => ({
 
 export default connect(
 	mapStateToProps,
-	{ getCourseById, editCourse }
+	{ editCourse }
 )(withRouter(withStyles(style)(EditCoursePage)))

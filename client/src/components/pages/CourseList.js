@@ -3,7 +3,7 @@ import Header from "../controls/Header"
 import CourseListItem from "../controls/CourseListItem"
 import { List } from "@material-ui/core"
 import { connect } from "react-redux"
-import { getCourses, getCoursesByTag } from "../../actions/courseActions"
+import { getCourses } from "../../actions/courseActions"
 import { withRouter } from "react-router-dom"
 
 class CourseList extends Component {
@@ -16,9 +16,7 @@ class CourseList extends Component {
 	}
 
 	getCourses = () => {
-		if (this.props.tag)
-			this.props.getCoursesByTag(this.props.tag, this.props.filter)
-		else this.props.getCourses(this.props.filter)
+		this.props.getCourses(this.props.filter)
 	}
 
 	render() {
@@ -43,5 +41,5 @@ const mapStateToProps = (state, ownProps) => ({
 
 export default connect(
 	mapStateToProps,
-	{ getCourses, getCoursesByTag }
+	{ getCourses }
 )(withRouter(CourseList))
