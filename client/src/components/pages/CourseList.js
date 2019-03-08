@@ -14,7 +14,7 @@ class CourseList extends Component {
 
 		this.state = {
 			order: "clicks",
-			tag: "",
+			tag: props.match.params.tag ? props.match.params.tag : "",
 			page: 0
 		}
 	}

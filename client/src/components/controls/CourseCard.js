@@ -64,7 +64,11 @@ class CourseCard extends Component {
 						<Typography component="p">{course.description}</Typography>
 						<br />
 						{course.tags.map(tag => (
-							<Link key={tag} className={classes.tag} to={`/tag/${tag}`}>
+							<Link
+								key={tag}
+								className={classes.tag}
+								to={`/course/list/${tag}`}
+							>
 								#{tag}{" "}
 							</Link>
 						))}
