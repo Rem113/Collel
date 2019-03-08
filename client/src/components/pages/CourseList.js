@@ -13,7 +13,7 @@ class CourseList extends Component {
 		if (!props.course.courses.length) props.getCourses()
 
 		this.state = {
-			filter: "",
+			order: "clicks",
 			tag: "",
 			page: 0
 		}
@@ -24,15 +24,33 @@ class CourseList extends Component {
 	}
 
 	render() {
-		if (this.props.course.courses.length === 0) return <p>Loading...</p>
+		const { courses } = this.props.course
+
+		if (!courses.length) return <p>Loading...</p>
+
+		let arr = courses.filter(course =>
+			this.state.tag !== ""
+				? course.tags.findIndex(tag => tag === this.state.tag) !== -1
+				: true
+		)
+
+		switch (this.state.order) {
+			case "clicks":
+				arr.sort((a, b) => a.clicks > b.clicks)
+				break
+			default:
+				arr.sort((a, b) => new Date(a.date) > new Date(b.date))
+		}
 
 		return (
 			<React.Fragment>
 				<Header />
 				<List>
-					{this.props.course.courses.map(course => (
-						<CourseListItem course={course} onTag={this.onTag} />
-					))}
+					{arr
+						.slice(this.state.page * 10, this.state.page * 10 + 10)
+						.map(course => (
+							<CourseListItem course={course} onTag={this.onTag} />
+						))}
 				</List>
 			</React.Fragment>
 		)
