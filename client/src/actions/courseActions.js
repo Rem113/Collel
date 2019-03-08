@@ -11,9 +11,9 @@ import {
 } from "./types"
 import axios from "axios"
 
-export const getCourses = (filter = "") => dispatch => {
+export const getCourses = () => dispatch => {
 	axios
-		.get(`/api/courses/${filter}`)
+		.get(`/api/courses`)
 		.then(res =>
 			dispatch({
 				type: GET_COURSES,
@@ -23,9 +23,9 @@ export const getCourses = (filter = "") => dispatch => {
 		.catch(err => console.error(err))
 }
 
-export const getCoursesByTag = (tag, filter = "") => dispatch => {
+export const getCoursesByTag = tag => dispatch => {
 	axios
-		.get(`/api/tags/${tag}/${filter}`)
+		.get(`/api/tags/${tag}`)
 		.then(res =>
 			dispatch({
 				type: GET_COURSES,
