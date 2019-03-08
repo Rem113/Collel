@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { Grid, Typography } from "@material-ui/core"
+import { Grid } from "@material-ui/core"
 import { withStyles } from "@material-ui/core/styles"
 import { addCourse } from "../../actions/courseActions"
 import { connect } from "react-redux"
