@@ -1,7 +1,9 @@
 import React, { Component } from "react"
 import Header from "../controls/Header"
 import CourseListItem from "../controls/CourseListItem"
-import { List } from "@material-ui/core"
+import Pagination from "material-ui-flat-pagination"
+import { ArrowBack, ArrowForward } from "@material-ui/icons"
+import { Grid, List } from "@material-ui/core"
 import { connect } from "react-redux"
 import { getCourses } from "../../actions/courseActions"
 import { withRouter } from "react-router-dom"
@@ -13,14 +15,18 @@ class CourseList extends Component {
 		if (!props.course.courses.length) props.getCourses()
 
 		this.state = {
-			order: "clicks",
+			order: "date",
 			tag: props.match.params.tag ? props.match.params.tag : "",
-			page: 0
+			offset: 0
 		}
 	}
 
 	onTag = tag => {
 		this.setState({ tag })
+	}
+
+	onOffset = offset => {
+		this.setState({ offset })
 	}
 
 	render() {
@@ -46,12 +52,23 @@ class CourseList extends Component {
 			<React.Fragment>
 				<Header />
 				<List>
-					{arr
-						.slice(this.state.page * 10, this.state.page * 10 + 10)
-						.map(course => (
-							<CourseListItem course={course} onTag={this.onTag} />
-						))}
+					{arr.slice(this.state.offset, this.state.offset + 10).map(course => (
+						<CourseListItem course={course} onTag={this.onTag} />
+					))}
 				</List>
+				<Grid container justify="center">
+					<Grid item>
+						<Pagination
+							limit={10}
+							offset={this.state.offset}
+							total={arr.length}
+							onClick={(e, offset) => this.onOffset(offset)}
+							size="large"
+							previousPageLabel={<ArrowBack />}
+							nextPageLabel={<ArrowForward />}
+						/>
+					</Grid>
+				</Grid>
 			</React.Fragment>
 		)
 	}

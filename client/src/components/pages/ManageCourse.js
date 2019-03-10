@@ -62,35 +62,6 @@ class ManageCourse extends Component {
 					</List>
 				</Grid>
 			</Grid>
-			/*<Container>
-				<h1 className="display-3 text-center my-4">Supprimer un cours</h1>
-				<ListGroup>
-					{courses &&
-						courses.map(course => (
-							<ListGroupItem key={course._id}>
-								<Row>
-									<Col sm={8}>
-										<ListGroupItemHeading>{course.title}</ListGroupItemHeading>
-										<ListGroupItemText>{course.description}</ListGroupItemText>
-									</Col>
-									<Col sm={4} className="d-flex align-items-center">
-										<Link to={`/course/edit/${course._id}`} className="ml-auto">
-											<Button className="mr-2" color="dark">
-												Modifier
-											</Button>
-										</Link>
-										<Button
-											color="danger"
-											onClick={() => this.props.deleteCourse(course._id)}
-										>
-											Supprimer
-										</Button>
-									</Col>
-								</Row>
-							</ListGroupItem>
-						))}
-				</ListGroup>
-			</Container>*/
 		)
 	}
 }

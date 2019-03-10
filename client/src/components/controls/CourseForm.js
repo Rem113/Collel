@@ -5,14 +5,21 @@ class CourseForm extends Component {
 	constructor(props) {
 		super(props)
 
-		this.state = {
-			...this.props.course,
-			tags: this.props.course
-				? this.props.course.tags
-					? this.props.course.tags.join(", ")
-					: ""
-				: ""
-		}
+		const { course } = props
+
+		this.state = course
+			? {
+					title: course.title,
+					description: course.description,
+					link: course.link,
+					tags: course.tags.join(", ")
+			  }
+			: {
+					title: "",
+					description: "",
+					link: "",
+					tags: ""
+			  }
 	}
 
 	onSubmit = e => {
@@ -52,7 +59,8 @@ class CourseForm extends Component {
 								value={this.state.title}
 								onChange={this.onChange}
 								fullWidth
-								errors={errors.title}
+								error={errors.title}
+								helperText={errors.title}
 							/>
 						</Grid>
 						<Grid item xs={12}>
@@ -66,7 +74,7 @@ class CourseForm extends Component {
 								fullWidth
 								multiline
 								rows={3}
-								errors={errors.description}
+								error={errors.description}
 							/>
 						</Grid>
 						<Grid item xs={12}>
@@ -78,7 +86,8 @@ class CourseForm extends Component {
 								value={this.state.link}
 								onChange={this.onChange}
 								fullWidth
-								errors={errors.link}
+								error={errors.link}
+								helperText={errors.link}
 							/>
 						</Grid>
 						<Grid item xs={12}>
@@ -91,7 +100,7 @@ class CourseForm extends Component {
 								value={this.state.tags}
 								onChange={this.onChange}
 								fullWidth
-								errors={errors.tags}
+								error={errors.tags}
 							/>
 						</Grid>
 						<Grid item align="center" xs={12}>

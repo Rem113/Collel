@@ -1,4 +1,10 @@
-import { GET_COURSES, ADD_COURSE, DELETE_COURSE, EDIT_COURSE } from "./types"
+import {
+	GET_COURSES,
+	ADD_COURSE,
+	DELETE_COURSE,
+	EDIT_COURSE,
+	ERROR_COURSE
+} from "./types"
 import axios from "axios"
 
 export const getCourses = () => dispatch => {
@@ -10,7 +16,12 @@ export const getCourses = () => dispatch => {
 				payload: res.data
 			})
 		)
-		.catch(err => console.error(err))
+		.catch(err =>
+			dispatch({
+				type: ERROR_COURSE,
+				payload: err.response.data
+			})
+		)
 }
 
 export const addCourse = (course, history) => dispatch => {
@@ -23,7 +34,12 @@ export const addCourse = (course, history) => dispatch => {
 			})
 			history.push("/")
 		})
-		.catch(err => console.error(err))
+		.catch(err =>
+			dispatch({
+				type: ERROR_COURSE,
+				payload: err.response.data
+			})
+		)
 }
 
 export const editCourse = (id, course, history) => dispatch => {
@@ -36,7 +52,12 @@ export const editCourse = (id, course, history) => dispatch => {
 			})
 			history.push("/")
 		})
-		.catch(err => console.error(err))
+		.catch(err =>
+			dispatch({
+				type: ERROR_COURSE,
+				payload: err.response.data
+			})
+		)
 }
 
 export const deleteCourse = id => dispatch => {
@@ -48,5 +69,10 @@ export const deleteCourse = id => dispatch => {
 				payload: id
 			})
 		)
-		.catch(err => console.error(err))
+		.catch(err =>
+			dispatch({
+				type: ERROR_COURSE,
+				payload: err.response.data
+			})
+		)
 }

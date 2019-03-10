@@ -3,7 +3,7 @@ import { Grid } from "@material-ui/core"
 import { withStyles } from "@material-ui/core/styles"
 import CourseForm from "../controls/CourseForm"
 import { connect } from "react-redux"
-import { editCourse } from "../../actions/courseActions"
+import { getCourses, editCourse } from "../../actions/courseActions"
 import { withRouter } from "react-router-dom"
 import Subtitle from "../controls/Subtitle"
 
@@ -14,21 +14,25 @@ const style = theme => ({
 })
 
 class EditCoursePage extends Component {
-	componentDidMount() {}
+	constructor(props) {
+		super(props)
+
+		if (!props.course.courses.length) props.getCourses()
+
+		this.state = {
+			id: props.match.params.id
+		}
+	}
 
 	onSubmit = course => {
-		this.props.editCourse(this.props.id, course, this.props.history)
+		this.props.editCourse(this.state.id, course, this.props.history)
 	}
 
 	render() {
-		if (this.props.course.loading)
-			return (
-				<div>
-					<p>Loading...</p>
-				</div>
-			)
-
 		const { classes } = this.props
+		const { courses, errors } = this.props.course
+
+		if (!courses.length) return <p>Loading...</p>
 
 		return (
 			<Grid
@@ -42,9 +46,11 @@ class EditCoursePage extends Component {
 				</Grid>
 				<Grid item xs={12}>
 					<CourseForm
-						course={this.props.course.course}
+						course={
+							courses[courses.findIndex(course => course._id === this.state.id)]
+						}
 						onSubmit={this.onSubmit}
-						errors={this.props.course.errors}
+						errors={errors}
 					/>
 				</Grid>
 			</Grid>
@@ -53,11 +59,10 @@ class EditCoursePage extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-	course: state.course,
-	id: ownProps.match.params.id
+	course: state.course
 })
 
 export default connect(
 	mapStateToProps,
-	{ editCourse }
+	{ getCourses, editCourse }
 )(withRouter(withStyles(style)(EditCoursePage)))
