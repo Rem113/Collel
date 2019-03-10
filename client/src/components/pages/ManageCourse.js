@@ -1,7 +1,14 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import { EditOutlined, DeleteOutlined } from "@material-ui/icons"
-import { Grid, List, ListItem, IconButton, Typography } from "@material-ui/core"
+import { Add, EditOutlined, DeleteOutlined } from "@material-ui/icons"
+import {
+	Grid,
+	List,
+	ListItem,
+	Button,
+	IconButton,
+	Typography
+} from "@material-ui/core"
 import { withStyles } from "@material-ui/core/styles"
 import { getCourses, deleteCourse } from "../../actions/courseActions"
 import { Link } from "react-router-dom"
@@ -11,6 +18,13 @@ import Subtitle from "../controls/Subtitle"
 const style = theme => ({
 	margin: {
 		margin: "auto"
+	},
+	button: {
+		margin: theme.spacing.unit,
+		textDecoration: "none"
+	},
+	leftIcon: {
+		marginRight: theme.spacing.unit
 	}
 })
 
@@ -28,6 +42,14 @@ class ManageCourse extends Component {
 				<Header />
 				<Grid item xs={12}>
 					<Subtitle caption="Gérer les cours" />
+				</Grid>
+				<Grid item xs={12} align="center">
+					<Link to={"/course/add"} className={classes.button}>
+						<Button variant="contained" color="primary">
+							<Add className={classes.leftIcon} />
+							Ajouter un cours
+						</Button>
+					</Link>
 				</Grid>
 				<Grid item xs={4}>
 					<List>
