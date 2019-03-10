@@ -1,13 +1,10 @@
 import React, { Component } from "react"
+import axios from "axios"
 import { connect } from "react-redux"
 import { Grid, Typography, IconButton } from "@material-ui/core"
 import { KeyboardArrowLeft, KeyboardArrowRight } from "@material-ui/icons"
 import { withStyles } from "@material-ui/core/styles"
-import {
-	getCourseById,
-	getPreviousCourse,
-	getNextCourse
-} from "../../actions/courseActions"
+import { getCourses } from "../../actions/courseActions"
 import { Link, withRouter } from "react-router-dom"
 import Loading from "../controls/Loading"
 
@@ -30,31 +27,53 @@ const style = theme => ({
 })
 
 class Course extends Component {
+	constructor(props) {
+		super(props)
+
+		if (!props.course.courses.length) props.getCourses()
+
+		this.state = {
+			id: props.match.params.id,
+			prev: "",
+			next: "",
+			course: {}
+		}
+	}
+
 	componentDidMount() {
-		this.updateCoursesProps(this.props.id)
+		this.updateState(this.props.match.params.id)
 	}
 
 	componentWillReceiveProps(nextProps) {
-		if (nextProps.id !== this.props.id) this.updateCoursesProps(nextProps.id)
+		this.updateState(nextProps.match.params.id, nextProps)
 	}
 
-	updateCoursesProps = id => {
-		this.props.getCourseById(id)
-		this.props.getPreviousCourse(id)
-		this.props.getNextCourse(id)
+	updateState = (id, props = this.props) => {
+		const { courses } = props.course
+
+		const index = courses.findIndex(course => course._id === id)
+
+		// Increments view count
+		if (index !== -1)
+			axios
+				.get(`/api/course/id/${courses[index]._id}`)
+				.catch(err => console.error(err))
+
+		this.setState({
+			prev: index - 1 >= 0 ? courses[index - 1]._id : "",
+			next: index + 1 < courses.length ? courses[index + 1]._id : "",
+			course: index >= 0 ? courses[index] : {}
+		})
 	}
 
 	render() {
 		const { classes } = this.props
-		const { course, prev, next, loading } = this.props.course
+		const { course, prev, next } = this.state
 
-		if (loading === true) return <Loading />
+		if (!course) return <p>Loading...</p>
 
-		const hasPrev = Object.getOwnPropertyNames(prev).length > 0
-		const hasNext = Object.getOwnPropertyNames(next).length > 0
-
-		const prevButton = hasPrev ? (
-			<Link to={`/course/id/${prev._id}`}>
+		const prevButton = prev ? (
+			<Link to={`/course/id/${prev}`}>
 				<IconButton color="primary">
 					<KeyboardArrowLeft />
 				</IconButton>
@@ -65,8 +84,8 @@ class Course extends Component {
 			</IconButton>
 		)
 
-		const nextButton = hasNext ? (
-			<Link to={`/course/id/${next._id}`}>
+		const nextButton = next ? (
+			<Link to={`/course/id/${next}`}>
 				<IconButton color="primary">
 					<KeyboardArrowRight />
 				</IconButton>
@@ -126,11 +145,10 @@ class Course extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-	course: state.course,
-	id: ownProps.match.params.id
+	course: state.course
 })
 
 export default connect(
 	mapStateToProps,
-	{ getCourseById, getPreviousCourse, getNextCourse }
+	{ getCourses }
 )(withRouter(withStyles(style)(Course)))

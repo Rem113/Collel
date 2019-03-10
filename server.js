@@ -1,7 +1,6 @@
 const express = require("express")
 const mongoose = require("mongoose")
-const courses = require("./routes/api/courses")
-const tags = require("./routes/api/tags")
+const course = require("./routes/api/course")
 const path = require("path")
 
 const app = express()
@@ -19,8 +18,7 @@ mongoose
 	.catch(err => console.log("An error has occured", err))
 
 // API routes
-app.use("/api/courses", courses)
-app.use("/api/tags/", tags)
+app.use("/api/course", course)
 
 // Server static assets if in production
 if (process.env.NODE_ENV === "production") {

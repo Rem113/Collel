@@ -1,7 +1,14 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import { EditOutlined, DeleteOutlined } from "@material-ui/icons"
-import { Grid, List, ListItem, IconButton, Typography } from "@material-ui/core"
+import { Add, EditOutlined, DeleteOutlined } from "@material-ui/icons"
+import {
+	Grid,
+	List,
+	ListItem,
+	Button,
+	IconButton,
+	Typography
+} from "@material-ui/core"
 import { withStyles } from "@material-ui/core/styles"
 import { getCourses, deleteCourse } from "../../actions/courseActions"
 import { Link } from "react-router-dom"
@@ -11,6 +18,13 @@ import Subtitle from "../controls/Subtitle"
 const style = theme => ({
 	margin: {
 		margin: "auto"
+	},
+	button: {
+		margin: theme.spacing.unit,
+		textDecoration: "none"
+	},
+	leftIcon: {
+		marginRight: theme.spacing.unit
 	}
 })
 
@@ -28,6 +42,14 @@ class ManageCourse extends Component {
 				<Header />
 				<Grid item xs={12}>
 					<Subtitle caption="Gérer les cours" />
+				</Grid>
+				<Grid item xs={12} align="center">
+					<Link to={"/course/add"} className={classes.button}>
+						<Button variant="contained" color="primary">
+							<Add className={classes.leftIcon} />
+							Ajouter un cours
+						</Button>
+					</Link>
 				</Grid>
 				<Grid item xs={4}>
 					<List>
@@ -62,35 +84,6 @@ class ManageCourse extends Component {
 					</List>
 				</Grid>
 			</Grid>
-			/*<Container>
-				<h1 className="display-3 text-center my-4">Supprimer un cours</h1>
-				<ListGroup>
-					{courses &&
-						courses.map(course => (
-							<ListGroupItem key={course._id}>
-								<Row>
-									<Col sm={8}>
-										<ListGroupItemHeading>{course.title}</ListGroupItemHeading>
-										<ListGroupItemText>{course.description}</ListGroupItemText>
-									</Col>
-									<Col sm={4} className="d-flex align-items-center">
-										<Link to={`/course/edit/${course._id}`} className="ml-auto">
-											<Button className="mr-2" color="dark">
-												Modifier
-											</Button>
-										</Link>
-										<Button
-											color="danger"
-											onClick={() => this.props.deleteCourse(course._id)}
-										>
-											Supprimer
-										</Button>
-									</Col>
-								</Row>
-							</ListGroupItem>
-						))}
-				</ListGroup>
-			</Container>*/
 		)
 	}
 }

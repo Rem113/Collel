@@ -21,6 +21,8 @@ const style = theme => ({
 	},
 	tag: {
 		textDecoration: "none",
+		cursor: "pointer",
+		display: "inline",
 		color: theme.palette.primary.main,
 		"&:hover": {
 			color: theme.palette.primary.dark
@@ -60,9 +62,13 @@ class CourseListItem extends Component {
 							<Grid item xs={12}>
 								<p>
 									{course.tags.map(tag => (
-										<Link to={`/tag/${tag}`} className={classes.tag}>
+										<p
+											key={tag}
+											onClick={() => this.props.onTag(tag)}
+											className={classes.tag}
+										>
 											#{tag + " "}
-										</Link>
+										</p>
 									))}
 								</p>
 								<Link

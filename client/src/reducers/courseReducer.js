@@ -1,22 +1,14 @@
 import {
 	GET_COURSES,
-	GET_COURSE_BY_ID,
 	ADD_COURSE,
-	LOADING_COURSE,
 	DELETE_COURSE,
 	EDIT_COURSE,
-	GET_PREVIOUS_COURSE,
-	GET_NEXT_COURSE,
-	ERROR
+	ERROR_COURSE
 } from "../actions/types"
 
 const initialState = {
 	courses: [],
-	loading: false,
-	course: {},
-	errors: {},
-	prev: {},
-	next: {}
+	errors: {}
 }
 
 export default function(state = initialState, action) {
@@ -27,23 +19,10 @@ export default function(state = initialState, action) {
 				courses: action.payload
 			}
 
-		case GET_COURSE_BY_ID:
-			return {
-				...state,
-				course: action.payload,
-				loading: false
-			}
-
 		case ADD_COURSE:
 			return {
 				...state,
 				courses: [...state.courses, action.payload]
-			}
-
-		case LOADING_COURSE:
-			return {
-				...state,
-				loading: true
 			}
 
 		case EDIT_COURSE:
@@ -60,22 +39,10 @@ export default function(state = initialState, action) {
 				courses: state.courses.filter(course => course._id !== action.payload)
 			}
 
-		case GET_PREVIOUS_COURSE:
+		case ERROR_COURSE:
 			return {
 				...state,
-				prev: action.payload
-			}
-
-		case GET_NEXT_COURSE:
-			return {
-				...state,
-				next: action.payload
-			}
-
-		case ERROR:
-			return {
-				...state,
-				errors: { ...action.payload }
+				errors: action.payload
 			}
 
 		default:
