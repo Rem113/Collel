@@ -50,7 +50,7 @@ class CourseCard extends Component {
 						component="img"
 						alt={course.title}
 						className={classes.media}
-						image={`http://img.youtube.com/vi/${course.link}/maxresdefault.jpg`}
+						image={`http://img.youtube.com/vi/${course.link}/mqdefault.jpg`}
 						title={course.title}
 					/>
 					<CardContent>

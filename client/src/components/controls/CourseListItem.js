@@ -42,7 +42,7 @@ class CourseListItem extends Component {
 					<Grid item xs={12} md={3} className={classes.vertical}>
 						<img
 							className={classes.image}
-							src={`http://img.youtube.com/vi/${course.link}/maxresdefault.jpg`}
+							src={`http://img.youtube.com/vi/${course.link}/mqdefault.jpg`}
 							alt={course.title}
 							title={course.title}
 						/>
