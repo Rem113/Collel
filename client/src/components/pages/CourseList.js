@@ -3,10 +3,17 @@ import Header from "../controls/Header"
 import CourseListItem from "../controls/CourseListItem"
 import Pagination from "material-ui-flat-pagination"
 import { ArrowBack, ArrowForward } from "@material-ui/icons"
-import { Grid, List } from "@material-ui/core"
+import { Grid, List, TextField } from "@material-ui/core"
+import { withStyles } from "@material-ui/core/styles"
 import { connect } from "react-redux"
 import { getCourses } from "../../actions/courseActions"
 import { withRouter } from "react-router-dom"
+
+const style = theme => ({
+	center: {
+		margin: "auto"
+	}
+})
 
 class CourseList extends Component {
 	constructor(props) {
@@ -15,6 +22,7 @@ class CourseList extends Component {
 		if (!props.course.courses.length) props.getCourses()
 
 		this.state = {
+			search: "",
 			order: "date",
 			tag: props.match.params.tag ? props.match.params.tag : "",
 			offset: 0
@@ -29,6 +37,10 @@ class CourseList extends Component {
 		this.setState({ offset })
 	}
 
+	onSearch = e => {
+		this.setState({ search: e.target.value })
+	}
+
 	render() {
 		const { courses } = this.props.course
 
@@ -40,6 +52,16 @@ class CourseList extends Component {
 				: true
 		)
 
+		if (this.state.search !== "") {
+			const reg = new RegExp(this.state.search, "gi")
+			arr = arr.filter(
+				course =>
+					course.title.match(reg) ||
+					course.description.match(reg) ||
+					course.tags.some(tag => tag.match(reg))
+			)
+		}
+
 		switch (this.state.order) {
 			case "clicks":
 				arr.sort((a, b) => a.clicks > b.clicks)
@@ -48,9 +70,20 @@ class CourseList extends Component {
 				arr.sort((a, b) => new Date(a.date) > new Date(b.date))
 		}
 
+		const { classes } = this.props
+
 		return (
 			<React.Fragment>
 				<Header />
+				<Grid container justify="center">
+					<Grid item xs={8}>
+						<TextField
+							label="Rechercher un cours..."
+							onChange={this.onSearch}
+							fullWidth
+						/>
+					</Grid>
+				</Grid>
 				<List>
 					{arr.slice(this.state.offset, this.state.offset + 10).map(course => (
 						<CourseListItem course={course} onTag={this.onTag} />
@@ -81,4 +114,4 @@ const mapStateToProps = state => ({
 export default connect(
 	mapStateToProps,
 	{ getCourses }
-)(withRouter(CourseList))
+)(withRouter(withStyles(style)(CourseList)))

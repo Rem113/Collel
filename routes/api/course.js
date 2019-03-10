@@ -9,6 +9,7 @@ const courseValidator = require("../../validators/course")
 // @access  Public
 router.get("/", (req, res) => {
 	Course.find()
+		.sort({ date: -1 })
 		.then(courses => res.json(courses))
 		.catch(err => console.error(err))
 })
@@ -29,7 +30,10 @@ router.post("/", (req, res) => {
 
 	if (!isValid) return res.status(400).json(errors)
 
-	let tags = data.tags.split(",").map(tag => tag.trim().toLowerCase())
+	let tags =
+		data.tags !== ""
+			? data.tags.split(",").map(tag => tag.trim().toLowerCase())
+			: []
 
 	const course = new Course({
 		title: data.title,
@@ -55,7 +59,10 @@ router.post("/:id", (req, res) => {
 
 	if (!isValid) return res.status(400).json(errors)
 
-	let tags = data.tags.split(",").map(tag => tag.trim().toLowerCase())
+	let tags =
+		data.tags !== ""
+			? data.tags.split(",").map(tag => tag.trim().toLowerCase())
+			: []
 
 	const course = {
 		title: data.title,

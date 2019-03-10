@@ -75,6 +75,7 @@ class CourseForm extends Component {
 								multiline
 								rows={3}
 								error={errors.description}
+								helperText={errors.description}
 							/>
 						</Grid>
 						<Grid item xs={12}>

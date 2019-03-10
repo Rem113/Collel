@@ -32,7 +32,7 @@ export const addCourse = (course, history) => dispatch => {
 				type: ADD_COURSE,
 				payload: res.data
 			})
-			history.push("/")
+			history.push("/course/manage")
 		})
 		.catch(err =>
 			dispatch({
@@ -50,7 +50,7 @@ export const editCourse = (id, course, history) => dispatch => {
 				type: EDIT_COURSE,
 				payload: res.data
 			})
-			history.push("/")
+			history.push("/course/manage")
 		})
 		.catch(err =>
 			dispatch({

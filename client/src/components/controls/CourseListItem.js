@@ -48,7 +48,7 @@ class CourseListItem extends Component {
 						/>
 					</Grid>
 					<Grid item xs={12} md={6} className={classes.vertical}>
-						<Typography variant="h2" component="h4">
+						<Typography variant="h3" component="h3">
 							{course.title}
 						</Typography>
 						<Typography variant="h5" component="h6">

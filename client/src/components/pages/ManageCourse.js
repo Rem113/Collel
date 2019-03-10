@@ -51,7 +51,7 @@ class ManageCourse extends Component {
 						</Button>
 					</Link>
 				</Grid>
-				<Grid item xs={4}>
+				<Grid item xs={9} md={6} lg={4}>
 					<List>
 						{courses.map(course => (
 							<ListItem key={course._id}>
