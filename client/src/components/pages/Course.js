@@ -125,8 +125,12 @@ class Course extends Component {
             <Grid className={classes.videoItem} item xs={6}>
               <iframe
                 className={classes.video}
-                title="youtube"
-                src={course.link}
+                title="video"
+                src={
+                  course.link.length === 11
+                    ? `https://www.youtube.com/embed/${course.link}?modestbranding=1&rel=0`
+                    : `https://drive.google.com/file/d/${course.link}/preview`
+                }
                 frameBorder="0"
                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
