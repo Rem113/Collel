@@ -70,7 +70,7 @@ class Course extends Component {
     const { classes } = this.props;
     const { course, prev, next } = this.state;
 
-    if (!course) return <p>Loading...</p>;
+    if (Object.keys(course).length === 0) return <p>Loading...</p>;
 
     const prevButton = prev ? (
       <Link to={`/course/id/${prev}`}>
